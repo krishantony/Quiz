@@ -1,0 +1,238 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TechQuiz - Online Quiz</title>
+
+    <!-- CSS FILE -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            T
+        </div>
+
+        <div>
+            <h2>TechQuiz</h2>
+            <p>Online Assessment</p>
+        </div>
+
+    </div>
+
+    <div class="timer">
+
+        <small>TIME LEFT</small>
+
+        <strong id="timer">
+            10:00
+        </strong>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <!-- QUIZ -->
+
+    <div class="quiz">
+
+        <div class="quiz-top">
+
+            <div>
+
+                <div class="category">
+                    COMPUTER SCIENCE
+                </div>
+
+                <h1 id="questionNumber">
+                    Question 1 of 10
+                </h1>
+
+            </div>
+
+            <div class="score">
+
+                <small>SCORE</small>
+
+                <strong id="score">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-info">
+
+            <span>
+                Quiz Progress
+            </span>
+
+            <span id="progressText">
+                10%
+            </span>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div id="progressBar"></div>
+
+        </div>
+
+
+        <div class="question">
+
+            <h2 id="question"></h2>
+
+            <div id="options"></div>
+
+            <div id="feedback"></div>
+
+        </div>
+
+
+        <div class="footer">
+
+            <button class="nav" id="previous">
+                ← Previous
+            </button>
+
+            <button class="nav" id="next">
+                Next Question →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h3>Questions</h3>
+
+        <p>Select a question</p>
+
+        <div class="questions" id="questionButtons"></div>
+
+        <div class="legend">
+
+            <div>
+                <span class="dot green"></span>
+                Answered
+            </div>
+
+            <div>
+                <span class="dot blue"></span>
+                Current
+            </div>
+
+            <div>
+                <span class="dot gray"></span>
+                Unanswered
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div id="result">
+
+    <div class="result-card">
+
+        <div class="trophy">
+            🏆
+        </div>
+
+        <div class="category">
+            QUIZ COMPLETED
+        </div>
+
+        <h1>Great Job!</h1>
+
+        <p>
+            Here is your final quiz result
+        </p>
+
+        <div class="final-score">
+
+            <span id="finalScore">
+                0
+            </span>/10
+
+        </div>
+
+
+        <div class="details">
+
+            <div>
+
+                <span>Correct</span>
+
+                <strong id="correct">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>Wrong</span>
+
+                <strong id="wrong">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>Percentage</span>
+
+                <strong id="percentage">
+                    0%
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <button class="retake" onclick="restart()">
+            Retake Quiz
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- JAVASCRIPT FILE -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
+```
