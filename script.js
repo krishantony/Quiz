@@ -1,180 +1,132 @@
 ```javascript
-/* ================= QUESTIONS ================= */
-
 const quizQuestions = [
 
     {
         question:"What does CPU stand for?",
-
         options:[
             "Central Processing Unit",
             "Computer Personal Unit",
             "Central Program Utility",
             "Control Processing User"
         ],
-
         answer:0
     },
 
-
     {
         question:"Which of the following is an operating system?",
-
         options:[
             "Microsoft Word",
             "Windows",
             "Google",
             "HTML"
         ],
-
         answer:1
     },
 
-
     {
         question:"Which language is used to create the structure of a webpage?",
-
         options:[
             "CSS",
             "HTML",
             "Python",
             "SQL"
         ],
-
         answer:1
     },
 
-
     {
         question:"Which language is mainly used to style a webpage?",
-
         options:[
             "HTML",
             "CSS",
             "Java",
             "C"
         ],
-
         answer:1
     },
 
-
     {
         question:"Which language is used to add interactivity to websites?",
-
         options:[
             "JavaScript",
             "HTML",
             "CSS",
             "SQL"
         ],
-
         answer:0
     },
 
-
     {
         question:"Which device is used to store data permanently?",
-
         options:[
             "RAM",
             "Keyboard",
             "Hard Disk",
             "Monitor"
         ],
-
         answer:2
     },
 
-
     {
         question:"What does URL stand for?",
-
         options:[
             "Uniform Resource Locator",
             "Universal Record Link",
             "User Resource Location",
             "Uniform Reference Link"
         ],
-
         answer:0
     },
 
-
     {
         question:"Which of these is a programming language?",
-
         options:[
             "Python",
             "Chrome",
             "Windows",
             "Google"
         ],
-
         answer:0
     },
 
-
     {
         question:"Which symbol is used for a comment in JavaScript?",
-
         options:[
             "//",
             "##",
             "<!-- -->",
             "**"
         ],
-
         answer:0
     },
 
-
     {
         question:"Which HTML tag is used to display an image?",
-
         options:[
             "<image>",
             "<picture>",
             "<img>",
             "<photo>"
         ],
-
         answer:2
     }
 
 ];
 
 
-/* ================= VARIABLES ================= */
-
 let current = 0;
-
 let score = 0;
-
-let answers =
-Array(quizQuestions.length).fill(null);
+let answers = Array(quizQuestions.length).fill(null);
 
 let time = 600;
-
 let timerInterval;
 
 
-/* ================= ELEMENTS ================= */
-
-const question =
-document.getElementById("question");
-
-const questionNumber =
-document.getElementById("questionNumber");
-
-const options =
-document.getElementById("options");
-
-const scoreDisplay =
-document.getElementById("score");
-
-const feedback =
-document.getElementById("feedback");
+const question = document.getElementById("question");
+const questionNumber = document.getElementById("questionNumber");
+const options = document.getElementById("options");
+const scoreDisplay = document.getElementById("score");
+const feedback = document.getElementById("feedback");
 
 const questionButtons =
 document.getElementById("questionButtons");
@@ -189,25 +141,20 @@ const timer =
 document.getElementById("timer");
 
 
-/* ================= CREATE QUESTION BUTTONS ================= */
+/* CREATE QUESTION BUTTONS */
 
 function createQuestionButtons(){
 
     questionButtons.innerHTML = "";
-
 
     quizQuestions.forEach((q,index)=>{
 
         const button =
         document.createElement("button");
 
-
         button.className = "qbtn";
 
-
-        button.textContent =
-        index + 1;
-
+        button.textContent = index + 1;
 
         button.onclick = ()=>{
 
@@ -217,7 +164,6 @@ function createQuestionButtons(){
 
         };
 
-
         questionButtons.appendChild(button);
 
     });
@@ -225,32 +171,24 @@ function createQuestionButtons(){
 }
 
 
-/* ================= LOAD QUESTION ================= */
+/* LOAD QUESTION */
 
 function loadQuestion(){
 
-    const q =
-    quizQuestions[current];
-
+    const q = quizQuestions[current];
 
     questionNumber.textContent =
     `Question ${current + 1} of ${quizQuestions.length}`;
 
-
-    question.textContent =
-    q.question;
-
+    question.textContent = q.question;
 
     progressBar.style.width =
     `${((current + 1) / quizQuestions.length) * 100}%`;
 
-
     progressText.textContent =
     `${Math.round(((current + 1) / quizQuestions.length) * 100)}%`;
 
-
     options.innerHTML = "";
-
 
     feedback.textContent = "";
 
@@ -260,20 +198,16 @@ function loadQuestion(){
         const button =
         document.createElement("button");
 
-
         button.className = "option";
-
 
         button.textContent =
         `${String.fromCharCode(65 + index)}. ${option}`;
-
 
         button.onclick = ()=>{
 
             selectAnswer(index);
 
         };
-
 
         options.appendChild(button);
 
@@ -287,7 +221,7 @@ function loadQuestion(){
 }
 
 
-/* ================= SELECT ANSWER ================= */
+/* SELECT ANSWER */
 
 function selectAnswer(selected){
 
@@ -296,7 +230,6 @@ function selectAnswer(selected){
 
 
     answers[current] = selected;
-
 
     const correct =
     quizQuestions[current].answer;
@@ -310,13 +243,11 @@ function selectAnswer(selected){
 
         button.disabled = true;
 
-
         if(index === correct){
 
             button.classList.add("correct");
 
         }
-
 
         if(index === selected &&
            selected !== correct){
@@ -332,13 +263,10 @@ function selectAnswer(selected){
 
         score++;
 
-        scoreDisplay.textContent =
-        score;
-
+        scoreDisplay.textContent = score;
 
         feedback.textContent =
         "✓ Correct Answer!";
-
 
         feedback.style.color =
         "#34d399";
@@ -349,7 +277,6 @@ function selectAnswer(selected){
 
         feedback.textContent =
         "✗ Wrong Answer!";
-
 
         feedback.style.color =
         "#f87171";
@@ -362,7 +289,7 @@ function selectAnswer(selected){
 }
 
 
-/* ================= NAVIGATION ================= */
+/* UPDATE BUTTONS */
 
 function updateNavigation(){
 
@@ -380,17 +307,13 @@ function updateNavigation(){
 
         if(index === current){
 
-            button.classList.add(
-                "current"
-            );
+            button.classList.add("current");
 
         }
 
         else if(answers[index] !== null){
 
-            button.classList.add(
-                "answered"
-            );
+            button.classList.add("answered");
 
         }
 
@@ -399,7 +322,7 @@ function updateNavigation(){
 }
 
 
-/* ================= NEXT BUTTON ================= */
+/* NEXT */
 
 document.getElementById("next").onclick = ()=>{
 
@@ -420,7 +343,7 @@ document.getElementById("next").onclick = ()=>{
 };
 
 
-/* ================= PREVIOUS BUTTON ================= */
+/* PREVIOUS */
 
 document.getElementById("previous").onclick = ()=>{
 
@@ -435,16 +358,14 @@ document.getElementById("previous").onclick = ()=>{
 };
 
 
-/* ================= BUTTON STATE ================= */
+/* BUTTON STATE */
 
 function updateButtons(){
 
     const previous =
     document.getElementById("previous");
 
-
-    previous.disabled =
-    current === 0;
+    previous.disabled = current === 0;
 
 
     const next =
@@ -468,7 +389,7 @@ function updateButtons(){
 }
 
 
-/* ================= TIMER ================= */
+/* TIMER */
 
 function startTimer(){
 
@@ -480,7 +401,6 @@ function startTimer(){
 
         const minutes =
         Math.floor(time / 60);
-
 
         const seconds =
         time % 60;
@@ -503,7 +423,7 @@ function startTimer(){
 }
 
 
-/* ================= SHOW RESULT ================= */
+/* RESULT */
 
 function showResult(){
 
@@ -513,10 +433,8 @@ function showResult(){
     const total =
     quizQuestions.length;
 
-
     const wrong =
     total - score;
-
 
     const percentage =
     Math.round((score / total) * 100);
@@ -525,14 +443,11 @@ function showResult(){
     document.getElementById("finalScore")
     .textContent = score;
 
-
     document.getElementById("correct")
     .textContent = score;
 
-
     document.getElementById("wrong")
     .textContent = wrong;
-
 
     document.getElementById("percentage")
     .textContent = percentage + "%";
@@ -544,7 +459,7 @@ function showResult(){
 }
 
 
-/* ================= RESTART QUIZ ================= */
+/* RESTART */
 
 function restart(){
 
@@ -553,7 +468,6 @@ function restart(){
     score = 0;
 
     time = 600;
-
 
     answers =
     Array(quizQuestions.length).fill(null);
@@ -576,7 +490,7 @@ function restart(){
 }
 
 
-/* ================= START QUIZ ================= */
+/* START */
 
 createQuestionButtons();
 
