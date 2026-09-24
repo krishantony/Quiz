@@ -1,0 +1,1554 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TechQuiz - Online Quiz</title>
+
+<style>
+
+/* ================= GENERAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Trebuchet MS", Arial, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:#e2e8f0;
+}
+
+
+/* ================= HEADER ================= */
+
+header{
+    height:80px;
+    background:#1e293b;
+    border-bottom:1px solid #334155;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 7%;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:46px;
+    height:46px;
+
+    border-radius:12px;
+
+    background:#06b6d4;
+    color:#082f49;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:23px;
+    font-weight:bold;
+}
+
+.logo h2{
+    color:#f8fafc;
+    font-size:21px;
+    letter-spacing:1px;
+}
+
+.logo p{
+    color:#94a3b8;
+    font-size:12px;
+    margin-top:3px;
+}
+
+
+/* ================= TIMER ================= */
+
+.timer{
+    background:#172554;
+    border:1px solid #2563eb;
+
+    padding:9px 22px;
+    border-radius:10px;
+
+    text-align:center;
+}
+
+.timer small{
+    display:block;
+
+    color:#67e8f9;
+
+    font-size:9px;
+    font-weight:bold;
+
+    letter-spacing:1.5px;
+}
+
+.timer strong{
+    color:#38bdf8;
+    font-size:21px;
+}
+
+
+/* ================= MAIN ================= */
+
+.container{
+    width:86%;
+    max-width:1200px;
+
+    margin:45px auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 280px;
+
+    gap:25px;
+}
+
+
+/* ================= QUIZ ================= */
+
+.quiz{
+    background:#1e293b;
+
+    border:1px solid #334155;
+
+    border-radius:18px;
+
+    padding:38px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.35);
+}
+
+.quiz-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.category{
+    color:#22d3ee;
+
+    font-size:11px;
+    font-weight:bold;
+
+    letter-spacing:2px;
+}
+
+#questionNumber{
+    font-size:25px;
+
+    margin-top:8px;
+
+    color:#f8fafc;
+}
+
+
+/* ================= SCORE ================= */
+
+.score{
+    border:1px solid #155e75;
+
+    background:#083344;
+
+    border-radius:10px;
+
+    padding:10px 20px;
+
+    text-align:center;
+}
+
+.score small{
+    display:block;
+
+    color:#67e8f9;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+}
+
+.score strong{
+    color:#22d3ee;
+
+    font-size:22px;
+}
+
+
+/* ================= PROGRESS ================= */
+
+.progress-info{
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+    margin-top:35px;
+    margin-bottom:8px;
+}
+
+.progress{
+    height:7px;
+
+    background:#334155;
+
+    border-radius:10px;
+
+    overflow:hidden;
+}
+
+#progressBar{
+    height:100%;
+
+    width:10%;
+
+    background:#06b6d4;
+
+    transition:.3s;
+}
+
+
+/* ================= QUESTION ================= */
+
+.question{
+    margin-top:42px;
+
+    min-height:280px;
+}
+
+#question{
+    color:#f8fafc;
+
+    font-size:22px;
+
+    line-height:1.5;
+
+    margin-bottom:25px;
+}
+
+
+/* ================= OPTIONS ================= */
+
+.option{
+    width:100%;
+
+    padding:16px 18px;
+
+    margin-bottom:12px;
+
+    border:1.5px solid #475569;
+
+    border-radius:10px;
+
+    background:#172033;
+
+    color:#cbd5e1;
+
+    text-align:left;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#22d3ee;
+
+    background:#083344;
+
+    color:white;
+}
+
+.option.correct{
+    background:#064e3b;
+
+    border-color:#10b981;
+
+    color:#6ee7b7;
+}
+
+.option.wrong{
+    background:#450a0a;
+
+    border-color:#ef4444;
+
+    color:#fca5a5;
+}
+
+.option:disabled{
+    cursor:not-allowed;
+}
+
+
+/* ================= FEEDBACK ================= */
+
+#feedback{
+    margin-top:12px;
+
+    font-weight:bold;
+
+    font-size:14px;
+}
+
+
+/* ================= FOOTER ================= */
+
+.footer{
+    border-top:1px solid #334155;
+
+    padding-top:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+}
+
+button.nav{
+    border:none;
+
+    padding:13px 22px;
+
+    border-radius:9px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    font-size:14px;
+}
+
+#previous{
+    background:#334155;
+
+    color:#cbd5e1;
+}
+
+#previous:hover{
+    background:#475569;
+}
+
+#next{
+    background:#06b6d4;
+
+    color:#082f49;
+}
+
+#next:hover{
+    background:#22d3ee;
+}
+
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    background:#1e293b;
+
+    border:1px solid #334155;
+
+    border-radius:18px;
+
+    padding:28px;
+
+    height:max-content;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.35);
+}
+
+.sidebar h3{
+    color:#f8fafc;
+
+    font-size:18px;
+}
+
+.sidebar p{
+    color:#94a3b8;
+
+    font-size:12px;
+
+    margin-top:6px;
+
+    margin-bottom:25px;
+}
+
+.questions{
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:9px;
+}
+
+.qbtn{
+    height:38px;
+
+    border:1px solid #475569;
+
+    background:#172033;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    color:#94a3b8;
+}
+
+.qbtn:hover{
+    border-color:#22d3ee;
+}
+
+.qbtn.current{
+    background:#06b6d4;
+
+    color:#082f49;
+
+    border-color:#06b6d4;
+}
+
+.qbtn.answered{
+    background:#064e3b;
+
+    color:#6ee7b7;
+
+    border-color:#10b981;
+}
+
+
+/* ================= LEGEND ================= */
+
+.legend{
+    border-top:1px solid #334155;
+
+    margin-top:25px;
+
+    padding-top:18px;
+}
+
+.legend div{
+    margin:9px 0;
+
+    color:#94a3b8;
+
+    font-size:12px;
+}
+
+.dot{
+    display:inline-block;
+
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    margin-right:7px;
+}
+
+.green{
+    background:#10b981;
+}
+
+.blue{
+    background:#06b6d4;
+}
+
+.gray{
+    background:#64748b;
+}
+
+
+/* ================= RESULT ================= */
+
+#result{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(2,6,23,.85);
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.result-card{
+    background:#1e293b;
+
+    border:1px solid #475569;
+
+    width:90%;
+
+    max-width:450px;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:0 15px 50px rgba(0,0,0,.5);
+}
+
+.trophy{
+    font-size:50px;
+}
+
+.result-card h1{
+    color:#f8fafc;
+
+    margin:12px 0;
+}
+
+.result-card p{
+    color:#94a3b8;
+}
+
+.final-score{
+    font-size:55px;
+
+    font-weight:bold;
+
+    color:#22d3ee;
+
+    margin:20px;
+}
+
+.details{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:10px;
+}
+
+.details div{
+    background:#172033;
+
+    border:1px solid #334155;
+
+    padding:14px;
+
+    border-radius:9px;
+}
+
+.details span{
+    display:block;
+
+    color:#94a3b8;
+
+    font-size:10px;
+}
+
+.details strong{
+    color:#f8fafc;
+
+    font-size:18px;
+}
+
+.retake{
+    width:100%;
+
+    margin-top:22px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:9px;
+
+    background:#06b6d4;
+
+    color:#082f49;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.retake:hover{
+    background:#22d3ee;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+
+    .container{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        order:-1;
+    }
+
+}
+
+@media(max-width:550px){
+
+    header{
+        padding:0 20px;
+    }
+
+    .container{
+        width:94%;
+
+        margin:20px auto;
+    }
+
+    .quiz{
+        padding:22px;
+    }
+
+    .question{
+        min-height:300px;
+    }
+
+    .logo p{
+        display:none;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            T
+        </div>
+
+        <div>
+
+            <h2>TechQuiz</h2>
+
+            <p>Online Assessment</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="timer">
+
+        <small>TIME LEFT</small>
+
+        <strong id="timer">
+            10:00
+        </strong>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+
+    <!-- QUIZ -->
+
+    <div class="quiz">
+
+
+        <div class="quiz-top">
+
+
+            <div>
+
+                <div class="category">
+                    COMPUTER SCIENCE
+                </div>
+
+                <h1 id="questionNumber">
+                    Question 1 of 10
+                </h1>
+
+            </div>
+
+
+            <div class="score">
+
+                <small>
+                    SCORE
+                </small>
+
+                <strong id="score">
+                    0
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress-info">
+
+            <span>
+                Quiz Progress
+            </span>
+
+            <span id="progressText">
+                10%
+            </span>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div id="progressBar"></div>
+
+        </div>
+
+
+
+        <!-- QUESTION -->
+
+        <div class="question">
+
+            <h2 id="question"></h2>
+
+            <div id="options"></div>
+
+            <div id="feedback"></div>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <div class="footer">
+
+            <button class="nav" id="previous">
+                ← Previous
+            </button>
+
+            <button class="nav" id="next">
+                Next Question →
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h3>
+            Questions
+        </h3>
+
+        <p>
+            Select a question
+        </p>
+
+
+        <div class="questions" id="questionButtons"></div>
+
+
+        <div class="legend">
+
+            <div>
+                <span class="dot green"></span>
+                Answered
+            </div>
+
+            <div>
+                <span class="dot blue"></span>
+                Current
+            </div>
+
+            <div>
+                <span class="dot gray"></span>
+                Unanswered
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ================= RESULT ================= -->
+
+<div id="result">
+
+    <div class="result-card">
+
+        <div class="trophy">
+            🏆
+        </div>
+
+        <div class="category">
+            QUIZ COMPLETED
+        </div>
+
+        <h1>
+            Great Job!
+        </h1>
+
+        <p>
+            Here is your final quiz result
+        </p>
+
+
+        <div class="final-score">
+
+            <span id="finalScore">
+                0
+            </span>/10
+
+        </div>
+
+
+        <div class="details">
+
+
+            <div>
+
+                <span>
+                    Correct
+                </span>
+
+                <strong id="correct">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Wrong
+                </span>
+
+                <strong id="wrong">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Percentage
+                </span>
+
+                <strong id="percentage">
+                    0%
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <button class="retake" onclick="restart()">
+            Retake Quiz
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* ================= QUESTIONS ================= */
+
+const quizQuestions = [
+
+
+{
+    question:"What does CPU stand for?",
+
+    options:[
+        "Central Processing Unit",
+        "Computer Personal Unit",
+        "Central Program Utility",
+        "Control Processing User"
+    ],
+
+    answer:0
+},
+
+
+{
+    question:"Which of the following is an operating system?",
+
+    options:[
+        "Microsoft Word",
+        "Windows",
+        "Google",
+        "HTML"
+    ],
+
+    answer:1
+},
+
+
+{
+    question:"Which language is used to create the structure of a webpage?",
+
+    options:[
+        "CSS",
+        "HTML",
+        "Python",
+        "SQL"
+    ],
+
+    answer:1
+},
+
+
+{
+    question:"Which language is mainly used to style a webpage?",
+
+    options:[
+        "HTML",
+        "CSS",
+        "Java",
+        "C"
+    ],
+
+    answer:1
+},
+
+
+{
+    question:"Which language is used to add interactivity to websites?",
+
+    options:[
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "SQL"
+    ],
+
+    answer:0
+},
+
+
+{
+    question:"Which device is used to store data permanently?",
+
+    options:[
+        "RAM",
+        "Keyboard",
+        "Hard Disk",
+        "Monitor"
+    ],
+
+    answer:2
+},
+
+
+{
+    question:"What does URL stand for?",
+
+    options:[
+        "Uniform Resource Locator",
+        "Universal Record Link",
+        "User Resource Location",
+        "Uniform Reference Link"
+    ],
+
+    answer:0
+},
+
+
+{
+    question:"Which of these is a programming language?",
+
+    options:[
+        "Python",
+        "Chrome",
+        "Windows",
+        "Google"
+    ],
+
+    answer:0
+},
+
+
+{
+    question:"Which symbol is used for a comment in JavaScript?",
+
+    options:[
+        "//",
+        "##",
+        "<!-- -->",
+        "**"
+    ],
+
+    answer:0
+},
+
+
+{
+    question:"Which HTML tag is used to display an image?",
+
+    options:[
+        "<image>",
+        "<picture>",
+        "<img>",
+        "<photo>"
+    ],
+
+    answer:2
+}
+
+
+];
+
+
+
+/* ================= VARIABLES ================= */
+
+let current = 0;
+
+let score = 0;
+
+let answers =
+Array(quizQuestions.length).fill(null);
+
+let time = 600;
+
+let timerInterval;
+
+
+
+/* ================= ELEMENTS ================= */
+
+const question =
+document.getElementById("question");
+
+const questionNumber =
+document.getElementById("questionNumber");
+
+const options =
+document.getElementById("options");
+
+const scoreDisplay =
+document.getElementById("score");
+
+const feedback =
+document.getElementById("feedback");
+
+const questionButtons =
+document.getElementById("questionButtons");
+
+const progressBar =
+document.getElementById("progressBar");
+
+const progressText =
+document.getElementById("progressText");
+
+const timer =
+document.getElementById("timer");
+
+
+
+/* ================= CREATE BUTTONS ================= */
+
+function createQuestionButtons(){
+
+    questionButtons.innerHTML="";
+
+
+    quizQuestions.forEach((q,index)=>{
+
+
+        const button =
+        document.createElement("button");
+
+
+        button.className="qbtn";
+
+
+        button.textContent =
+        index + 1;
+
+
+        button.onclick=()=>{
+
+            current=index;
+
+            loadQuestion();
+
+        };
+
+
+        questionButtons.appendChild(button);
+
+
+    });
+
+}
+
+
+
+/* ================= LOAD QUESTION ================= */
+
+function loadQuestion(){
+
+
+    const q =
+    quizQuestions[current];
+
+
+    questionNumber.textContent =
+    `Question ${current+1} of ${quizQuestions.length}`;
+
+
+    question.textContent =
+    q.question;
+
+
+    progressBar.style.width =
+    `${((current+1)/quizQuestions.length)*100}%`;
+
+
+    progressText.textContent =
+    `${Math.round(((current+1)/quizQuestions.length)*100)}%`;
+
+
+    options.innerHTML="";
+
+
+    feedback.textContent="";
+
+
+
+    q.options.forEach((option,index)=>{
+
+
+        const button =
+        document.createElement("button");
+
+
+        button.className="option";
+
+
+        button.textContent =
+        `${String.fromCharCode(65+index)}. ${option}`;
+
+
+        button.onclick=()=>{
+
+            selectAnswer(index);
+
+        };
+
+
+        options.appendChild(button);
+
+
+    });
+
+
+
+    updateButtons();
+
+    updateNavigation();
+
+}
+
+
+
+/* ================= ANSWER ================= */
+
+function selectAnswer(selected){
+
+
+    if(answers[current]!==null)
+        return;
+
+
+    answers[current]=selected;
+
+
+    const correct =
+    quizQuestions[current].answer;
+
+
+    const buttons =
+    document.querySelectorAll(".option");
+
+
+
+    buttons.forEach((button,index)=>{
+
+
+        button.disabled=true;
+
+
+        if(index===correct){
+
+            button.classList.add("correct");
+
+        }
+
+
+        if(index===selected &&
+           selected!==correct){
+
+            button.classList.add("wrong");
+
+        }
+
+
+    });
+
+
+
+    if(selected===correct){
+
+
+        score++;
+
+
+        scoreDisplay.textContent =
+        score;
+
+
+        feedback.textContent =
+        "✓ Correct Answer!";
+
+
+        feedback.style.color =
+        "#34d399";
+
+
+    }
+
+    else{
+
+
+        feedback.textContent =
+        "✗ Wrong Answer!";
+
+
+        feedback.style.color =
+        "#f87171";
+
+    }
+
+
+    updateNavigation();
+
+}
+
+
+
+/* ================= NAVIGATION ================= */
+
+function updateNavigation(){
+
+
+    const buttons =
+    document.querySelectorAll(".qbtn");
+
+
+    buttons.forEach((button,index)=>{
+
+
+        button.classList.remove(
+            "current",
+            "answered"
+        );
+
+
+        if(index===current){
+
+            button.classList.add("current");
+
+        }
+
+        else if(answers[index]!==null){
+
+            button.classList.add("answered");
+
+        }
+
+
+    });
+
+}
+
+
+
+/* ================= NEXT ================= */
+
+document.getElementById("next").onclick=()=>{
+
+
+    if(current <
+       quizQuestions.length-1){
+
+
+        current++;
+
+
+        loadQuestion();
+
+
+    }
+
+    else{
+
+
+        showResult();
+
+
+    }
+
+};
+
+
+
+/* ================= PREVIOUS ================= */
+
+document.getElementById("previous").onclick=()=>{
+
+
+    if(current>0){
+
+
+        current--;
+
+
+        loadQuestion();
+
+
+    }
+
+};
+
+
+
+/* ================= BUTTON STATE ================= */
+
+function updateButtons(){
+
+
+    const previous =
+    document.getElementById("previous");
+
+
+    previous.disabled =
+    current===0;
+
+
+    const next =
+    document.getElementById("next");
+
+
+    if(current ===
+       quizQuestions.length-1){
+
+
+        next.textContent =
+        "Finish Quiz ✓";
+
+
+    }
+
+    else{
+
+
+        next.textContent =
+        "Next Question →";
+
+    }
+
+}
+
+
+
+/* ================= TIMER ================= */
+
+function startTimer(){
+
+
+    timerInterval =
+    setInterval(()=>{
+
+
+        time--;
+
+
+        const minutes =
+        Math.floor(time/60);
+
+
+        const seconds =
+        time%60;
+
+
+        timer.textContent =
+        `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+
+
+        if(time<=0){
+
+
+            clearInterval(timerInterval);
+
+
+            showResult();
+
+
+        }
+
+
+    },1000);
+
+}
+
+
+
+/* ================= RESULT ================= */
+
+function showResult(){
+
+
+    clearInterval(timerInterval);
+
+
+    const total =
+    quizQuestions.length;
+
+
+    const wrong =
+    total-score;
+
+
+    const percentage =
+    Math.round((score/total)*100);
+
+
+    document.getElementById("finalScore")
+    .textContent=score;
+
+
+    document.getElementById("correct")
+    .textContent=score;
+
+
+    document.getElementById("wrong")
+    .textContent=wrong;
+
+
+    document.getElementById("percentage")
+    .textContent=percentage+"%";
+
+
+    document.getElementById("result")
+    .style.display="flex";
+
+}
+
+
+
+/* ================= RESTART ================= */
+
+function restart(){
+
+
+    current=0;
+
+
+    score=0;
+
+
+    time=600;
+
+
+    answers =
+    Array(quizQuestions.length).fill(null);
+
+
+    scoreDisplay.textContent="0";
+
+
+    document.getElementById("result")
+    .style.display="none";
+
+
+    clearInterval(timerInterval);
+
+
+    loadQuestion();
+
+
+    startTimer();
+
+}
+
+
+
+/* ================= START ================= */
+
+createQuestionButtons();
+
+loadQuestion();
+
+startTimer();
+
+
+</script>
+
+</body>
+</html>
+```
